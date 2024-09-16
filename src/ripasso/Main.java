@@ -5,9 +5,13 @@ public class Main {
 public static void main (String [] args){
 
     Scanner in = new Scanner (System.in);
-    String [] concessionario = new String [100];
+    String [] arrayMarca = new String [100];
+    String [] arrayModello = new String [100];
+    String [] arrayPrezzo = new String [100];
 
-    String auto;
+    String marca;
+    String modello;
+    String prezzo;
 
     boolean closecode = true;
     do {
@@ -25,16 +29,47 @@ public static void main (String [] args){
 
         switch (scelta){
             case 1:
-                System.out.println("quale auto vuoi aggiungere?");
-                auto = in.next();
-                 Metodi.AggiuntaAuto(concessionario);
+                System.out.println("inserisci la marca dell'auto");
+                marca = in.next();
+                System.out.println("inserisci il modello");
+                modello = in.next();
+                System.out.println("inserisci il prezzo");
+                prezzo = in.next();
+                Metodi.AggiuntaAuto(marca, modello, prezzo, arrayMarca, arrayModello, arrayPrezzo);
                 break;
 
             case 2:
+                for (int i = 0; i < arrayMarca.length; i ++){
+                    if (arrayMarca [i] == null){
+                        break;
+                    }
+                    else {
+                        System.out.println(arrayMarca [i]+ " " + arrayModello [i] + " " + arrayPrezzo [i]);
+                    }
+                }
+                System.out.println("");
+
                 break;
 
             case 3:
+                int numeroRicerca;
+                System.out.println("inserisci marca");
+                marca = in.next();
+
+                System.out.println("inserisci modello");
+                modello = in.next();
+
+                numeroRicerca = Metodi.ricercaMarcaModello(marca, modello, arrayMarca, arrayModello);
+                if (numeroRicerca == 101){
+                    System.out.println("non ci sono auto con questa marca e modello");
+                }
+                else {
+                    System.out.println("L'auto che hai cercato è disponibile per: " + arrayPrezzo [numeroRicerca] + "€");
+                }
+
                 break;
+
+
 
 
             case 4:
