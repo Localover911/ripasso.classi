@@ -156,6 +156,21 @@ public static void main (String [] args){
                 break;
 
             case 7:
+                if (contaAuto == 0){
+                    System.out.println ("non ci sono auto nel catalogo, inseriscine una");
+                    break;
+                }
+
+                for (int i = 0; i < arrayMarca.length; i ++){
+                    if (arrayModello [i] == null){
+                        break;
+                    }
+                    else if (arrayModello [i].contains("diesel")){
+                        System.out.println(arrayMarca [i]+ " " + arrayModello [i] + " " + arrayPrezzo [i]);
+                    }
+                }
+                System.out.println(" ");
+
                 break;
 
             case 8:
