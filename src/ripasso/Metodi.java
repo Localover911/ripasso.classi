@@ -26,17 +26,35 @@ public class Metodi {
     }
 
 
-    public static int ricercaMarcaModello (String marca, String modello, String [] arrayMarca, String [] arrayModello){
-    int numeroRicerca = 101;
-        for (int i = 0; i < arrayMarca.length; i ++){
+    public static int ricercaMarcaModello (String marca, String modello, String [] arrayMarca, String [] arrayModello, int contaAuto){
+    int numeroRicerca = -1;
+        for (int i = 0; i < contaAuto; i ++){
             if (arrayMarca[i].equalsIgnoreCase(marca) && arrayModello[i].equalsIgnoreCase(modello)){
                 numeroRicerca = i;
                 break;
-            }
-            else {
             }
             }
     return numeroRicerca;
     }
 
+
+    public static void modificaDati (String [] arrayMarca, String [] arrayModello, String [] arrayPrezzo, String newMarca, String newModello, String newPrezzo, int ricerca){
+        arrayMarca [ricerca] = newMarca;
+        arrayModello [ricerca] = newModello;
+        arrayPrezzo [ricerca] = newPrezzo;
+
+    }
+
+
+    public static int eliminaAuto (String [] arrayMarca, String [] arrayModello, String [] arrayPrezzo, int ricerca, int contaAuto){
+
+        for (int i = ricerca; i < contaAuto; i ++){
+            arrayMarca [i] = arrayMarca [i+1];
+            arrayModello [i] = arrayModello [i+1];
+            arrayPrezzo [i] = arrayPrezzo [i+1];
+
+        }
+        contaAuto = contaAuto - 1;
+        return contaAuto;
+    }
 }

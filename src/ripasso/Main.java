@@ -12,6 +12,7 @@ public static void main (String [] args){
     String marca;
     String modello;
     String prezzo;
+    int contaAuto = 0;
 
     boolean closecode = true;
     do {
@@ -36,9 +37,15 @@ public static void main (String [] args){
                 System.out.println("inserisci il prezzo");
                 prezzo = in.next();
                 Metodi.AggiuntaAuto(marca, modello, prezzo, arrayMarca, arrayModello, arrayPrezzo);
+                contaAuto = contaAuto + 1;
                 break;
 
             case 2:
+                if (contaAuto == 0){
+                    System.out.println ("non ci sono auto nel catalogo, inseriscine una");
+                    break;
+                }
+
                 for (int i = 0; i < arrayMarca.length; i ++){
                     if (arrayMarca [i] == null){
                         break;
@@ -47,11 +54,16 @@ public static void main (String [] args){
                         System.out.println(arrayMarca [i]+ " " + arrayModello [i] + " " + arrayPrezzo [i]);
                     }
                 }
-                System.out.println("");
+                System.out.println(" ");
 
                 break;
 
             case 3:
+                if (contaAuto == 0){
+                    System.out.println ("non ci sono auto nel catalogo, inseriscine una");
+                    break;
+                }
+
                 int numeroRicerca;
                 System.out.println("inserisci marca");
                 marca = in.next();
@@ -59,8 +71,8 @@ public static void main (String [] args){
                 System.out.println("inserisci modello");
                 modello = in.next();
 
-                numeroRicerca = Metodi.ricercaMarcaModello(marca, modello, arrayMarca, arrayModello);
-                if (numeroRicerca == 101){
+                numeroRicerca = Metodi.ricercaMarcaModello(marca, modello, arrayMarca, arrayModello, contaAuto);
+                if (numeroRicerca == -1){
                     System.out.println("non ci sono auto con questa marca e modello");
                 }
                 else {
@@ -73,9 +85,71 @@ public static void main (String [] args){
 
 
             case 4:
+                if (contaAuto == 0){
+                    System.out.println ("non ci sono auto nel catalogo, inseriscine una");
+                    break;
+                }
+
+                int ricercaDaEliminare = -1;
+                System.out.println("inserisci la marca dell'auto da eliminare");
+                marca = in.next();
+                System.out.println("inserisci il modello");
+                modello = in.next();
+                System.out.println("inserisci il prezzo");
+                prezzo = in.next();
+
+                for (int i = 0; i < contaAuto; i ++){
+                    if (arrayMarca[i].equalsIgnoreCase(marca) && arrayModello[i].equalsIgnoreCase(modello) && arrayPrezzo[i].equalsIgnoreCase(prezzo) ){
+                        ricercaDaEliminare = i;
+                        break;
+                    }
+                }
+                if (ricercaDaEliminare == -1){
+                    System.out.println("non esiste un auto con queste caratteristiche");
+                    break;
+                }
+
+                contaAuto = Metodi.eliminaAuto (arrayMarca, arrayModello, arrayPrezzo, ricercaDaEliminare, contaAuto);
+
                 break;
 
             case 5:
+                if (contaAuto == 0){
+                    System.out.println ("non ci sono auto nel catalogo, inseriscine una");
+                    break;
+                }
+
+                int ricerca = -1;
+                String newMarca;
+                String newModello;
+                String newPrezzo;
+
+                System.out.println("inserisci la marca dell'auto");
+                marca = in.next();
+                System.out.println("inserisci il modello");
+                modello = in.next();
+                System.out.println("inserisci il prezzo");
+                prezzo = in.next();
+
+                for (int i = 0; i < contaAuto; i ++){
+                    if (arrayMarca[i].equalsIgnoreCase(marca) && arrayModello[i].equalsIgnoreCase(modello) && arrayPrezzo[i].equalsIgnoreCase(prezzo) ){
+                        ricerca = i;
+                        break;
+                    }
+                }
+                if (ricerca == -1){
+                    System.out.println("non esiste un auto con queste caratteristiche");
+                    break;
+                }
+
+                System.out.println("inserisci la marca da sostituire");
+                newMarca = in.next();
+                System.out.println("inserisci il modello da sostituire");
+                newModello = in.next();
+                System.out.println("inserisci il prezzo da sostituire");
+                newPrezzo = in.next();
+
+                Metodi.modificaDati (arrayMarca, arrayModello, arrayPrezzo, newMarca, newModello, newPrezzo, ricerca);
                 break;
 
             case 6:
